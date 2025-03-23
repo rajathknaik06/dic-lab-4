@@ -1,0 +1,46 @@
+""" Bobby is managing employee performance records across two departments. Each department has a separate list of employees with their scores from different evaluations. Bobby needs to combine these records, calculate the average score for each employee who appears in both departments, and round the result to two decimal places.
+
+
+
+Your task is to help Bobby by writing a program to compute the average score for each employee who appears in both departments.
+
+Input format :
+The first line of input consists of an integer n1, representing the number of employees in the first department.
+
+The next n1 lines each contain an integer followed by a list of integers, representing the employee ID and their scores in the first department.
+
+The next line consists of an integer n2, representing the number of employees in the second department.
+
+The following n2 lines each contain an integer followed by a list of integers, representing the employee ID and their scores in the second department.
+
+Output format :
+The output is a dictionary where the keys are employee IDs, and the values are their average scores rounded to two decimal places."""
+
+# Input data
+n1 = int(input())
+dict1 = {}
+for _ in range(n1):
+    data = list(map(int, input().split()))
+    emp_id = data[0]
+    scores = data[1:]
+    dict1[emp_id] = scores
+
+n2 = int(input())
+dict2 = {}
+for _ in range(n2):
+    data = list(map(int, input().split()))
+    emp_id = data[0]
+    scores = data[1:]
+    dict2[emp_id] = scores
+
+# Combine dictionaries and average scores
+result = {}
+for emp_id in dict1:
+    if emp_id in dict2:
+        scores1 = dict1[emp_id]
+        scores2 = dict2[emp_id]
+        all_scores = scores1 + scores2
+        average_score = sum(all_scores) / len(all_scores)
+        result[emp_id] = f"{average_score:.2f}"  # Ensure two decimal places
+
+print(result)
